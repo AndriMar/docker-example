@@ -1,0 +1,28 @@
+.container {
+  border: 1px solid black;
+  padding: 10px;
+}
+.messages{
+  background-color: #002B36;
+  min-height: 100px;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+.line {
+  padding: 5px;
+  background-color: transparent;;
+  color: white;
+}
+.linename{
+  color: green;
+}
+.linemessage{
+  margin-left: 10px;
+}
+.channelname{
+  background-color: lightgray;
+  padding: 5px;
+  font-weight: bold;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}

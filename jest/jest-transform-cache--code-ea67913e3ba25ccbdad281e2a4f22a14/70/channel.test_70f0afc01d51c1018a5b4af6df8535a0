@@ -1,0 +1,28 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_channel = require('../app/channel'); /* istanbul ignore next */var _channel2 = _interopRequireDefault(_channel);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+describe('Tests for Channel', function () {
+  it('Should take props', function () {
+    var data = [];
+    var channelData = /* istanbul ignore next */(0, _enzyme.shallow)(
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_channel2.default, /* istanbul ignore next */{ username: 'Andri', initData: data }));
+
+    expect(channelData.state().initData).toEqual([]);
+  });
+  it('Should take username and render', function () {
+    var channelusername = /* istanbul ignore next */(0, _enzyme.shallow)(
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_channel2.default, /* istanbul ignore next */{ username: 'Andri', initData: [] }));
+
+
+    expect(channelusername.find('h3').text()).toEqual('Welcome Andri');
+
+  });
+  it('Should render children', function () {
+    var initData = [];
+    var channelData = /* istanbul ignore next */(0, _enzyme.shallow)(
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_channel2.default, /* istanbul ignore next */{ username: '', initData: initData }));
+
+    expect(channelData.node.props.children.length).toBe(2);
+
+  });
+});

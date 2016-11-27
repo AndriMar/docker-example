@@ -1,0 +1,16 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_messageline = require('../app/channel/messageline'); /* istanbul ignore next */var _messageline2 = _interopRequireDefault(_messageline);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+describe('Tests for messageline', function () {
+  it('Should take props', function () {
+    var data = { id: '1212-1212-1212-1212', username: 'Andri', message: 'Hello' };
+    var msg = /* istanbul ignore next */(0, _enzyme.shallow)(
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_messageline2.default, /* istanbul ignore next */{ data: data }));
+
+
+    expect(msg.find('span').length).toEqual(2);
+    expect(msg.childAt(0).text()).toEqual(data.username + ":");
+    expect(msg.childAt(1).text()).toEqual(data.message);
+
+  });
+});

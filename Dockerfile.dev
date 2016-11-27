@@ -1,0 +1,12 @@
+FROM node
+
+WORKDIR /code
+
+RUN npm install -g yarn supervisor --loglevel=warn --no-progress
+
+COPY package.json .
+COPY yarn.lock .
+COPY Makefile .
+
+RUN yarn
+EXPOSE 8080

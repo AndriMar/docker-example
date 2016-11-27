@@ -1,0 +1,6 @@
+{
+  "rethinkdb":{
+    "DB": "docker",
+    "Table": "chat"
+  }
+}

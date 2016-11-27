@@ -1,0 +1,57 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_style = require('./style.css'); /* istanbul ignore next */var _style2 = _interopRequireDefault(_style);
+var /* istanbul ignore next */_axios = require('axios'); /* istanbul ignore next */var _axios2 = _interopRequireDefault(_axios);
+var /* istanbul ignore next */_messageline = require('./messageline'); /* istanbul ignore next */var _messageline2 = _interopRequireDefault(_messageline);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}
+
+var socket = /* istanbul ignore next */void 0; /* istanbul ignore next */var
+Channel = function (_React$Component) {_inherits(Channel, _React$Component);
+
+  function /* istanbul ignore next */Channel(props) {/* istanbul ignore next */_classCallCheck(this, Channel);var _this = _possibleConstructorReturn(this, (Channel.__proto__ || Object.getPrototypeOf(Channel)).call(this,
+    props));
+    socket = props.socket;
+    /* istanbul ignore next */_this.state = {
+      username: props.username,
+      initData: props.initData }; /* istanbul ignore next */return _this;
+
+  }_createClass(Channel, [{ key: 'addNewMessage', value: function addNewMessage(
+    message) {
+      var initData = this.state.initData;
+      initData.push(message);
+      this.setState({ initData: initData });
+      this.scrollDown();
+    } }, { key: 'newUser', value: function newUser(
+    user) {/* istanbul ignore next */var
+      username = user.username,id = user.id;
+      this.addNewMessage({ message: username + ' joined us!', username: 'BOT', id: id });
+    } }, { key: 'userLeft', value: function userLeft(
+    user) {/* istanbul ignore next */var
+      username = user.username,id = user.id;
+      this.addNewMessage({ message: username + ' left us!', username: 'BOT', id: id });
+    } }, { key: 'scrollDown', value: function scrollDown()
+    {
+      var objDiv = document.getElementById("message_window");
+      objDiv.scrollTop = objDiv.scrollHeight;
+    } }, { key: 'componentDidMount', value: function componentDidMount()
+    {
+      socket.emit('user:join', { username: this.state.username });
+      socket.on('in:message', this.addNewMessage.bind(this));
+      socket.on('user:join', this.newUser.bind(this));
+      socket.on('user:left', this.userLeft.bind(this));
+      this.scrollDown();
+    } }, { key: 'render', value: function render()
+
+    {
+      return (
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: /* istanbul ignore next */_style2.default.container },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */{ className: /* istanbul ignore next */_style2.default.title }, /* istanbul ignore next */'Welcome ', this.state.username),
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: /* istanbul ignore next */_style2.default.chat },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: /* istanbul ignore next */_style2.default.channelname }, /* istanbul ignore next */'Docker Chat'),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ id: 'message_window', className: /* istanbul ignore next */_style2.default.messages },
+              this.state.initData.map(function (msg) /* istanbul ignore next */{return (
+                  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_messageline2.default, /* istanbul ignore next */{ data: msg, key: msg.id }));})))));
+
+
+
+
+
+    } }]);return Channel;}( /* istanbul ignore next */_react2.default.Component); /* istanbul ignore next */exports.default = Channel;
